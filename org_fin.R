@@ -1,6 +1,14 @@
-
+library(readxl)
+library(dplyr)
+library(ggplot2)
 
 # Download Data
+
+mets <- read_excel('mets2026_2025.xlsx')
+order <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+
+mets <- mets |> mutate(Season = factor(Season), Day_of_week = factor(Day_of_week, levels = order) )
+mets
 
 
 # CHARTS
