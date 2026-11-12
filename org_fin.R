@@ -159,4 +159,6 @@ ggplot(mets, aes(x = `D/N`, y = Attendance, fill = Season)) +
 
 # Null Hypothesis #4: Giveaway Nights Don't Affect Attendance (t-test)
 
-# Null Hypothesis #5: Playing a Rival Team Doesn't Affect Attendance (t-test)
+# Null Hypothesis #5: Playing a Rival Team Doesn't Affect Attendance (t-test, ANOVA for specific team)
+
+# Null Hypothesis #6: Time of Day Doesn't Affect Attendance (t-test)
