@@ -25,3 +25,4 @@ mets_2026 <- subset(mets, Season == 2026)
 # Null Hypothesis #5: Playing a Rival Team Doesn't Affect Attendance (t-test, ANOVA for specific team)
 
 # Null Hypothesis #6: Time of Day Doesn't Affect Attendance (t-test)
+

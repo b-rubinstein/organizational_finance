@@ -7,8 +7,11 @@ library(cowplot)
 
 mets <- read_excel('mets2026_2025.xlsx')
 order <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+order_month <- c("March", "April", "May", "June", "July", "August", "September")
 
-mets <- mets |> mutate(Season = factor(Season), Day_of_week = factor(Day_of_week, levels = order) )
+
+mets <- mets |> mutate(Season = factor(Season), Day_of_week = factor(Day_of_week, levels = order),
+                       Month  = factor(format(Date_formatted, "%B"), levels = order_month))
 
 mets_2025 <- subset(mets, Season == 2025)
 mets_2026 <- subset(mets, Season == 2026)
@@ -50,7 +53,7 @@ ggplot(mets, aes(x = Win_Pct_Pre, y = Attendance, color = Season)) +
   ) + theme_cowplot()
 
 ## REMOVING FIRST 10 GAMES
-remove <- which(mets$`Gm#` < 10)
+remove <- which(mets$`Gm#` <= 10)
 mets_filter <- mets[-remove, ]
 
 ggplot(mets_filter, aes(x = Win_Pct_Pre, y = Attendance, color = Season)) +
@@ -59,7 +62,7 @@ ggplot(mets_filter, aes(x = Win_Pct_Pre, y = Attendance, color = Season)) +
   scale_color_manual(values = c("2025" = "blue", "2026" = "orange")) +
   labs(
     title = "Mets Win % vs. Attendance",
-    subtitle = "2025 vs 2026 Seasons",
+    subtitle = "2025 vs 2026 Seasons (excluding first 10 games per season)",
     x = "Win % Going Into Game",
     y = "Attendance"
   ) + theme_cowplot()
@@ -146,6 +149,22 @@ ggplot(mets, aes(x = `D/N`, y = Attendance, fill = Season)) +
   labs(
     title = 'Mets Average Attendance by Time of Day',
     x = NULL,
+    y = 'Avg Attendance',
+    subtitle = '2025 vs 2026 Seasons') + theme_cowplot()
+
+
+# 2025 vs 2026 Avg Attendance by Month
+
+remove <- which(mets$Month == 'March')
+mets_filter <- mets[-remove, ]
+
+month_avg <- mets_filter |> group_by(Season, Month) |> summarise(avg_attendance = mean(Attendance))
+ggplot(mets_filter, aes(x = Month, y = Attendance, fill = Season)) +
+  geom_bar(stat = 'summary', position = 'dodge') +
+  scale_fill_manual(values = c("2025" = "blue", "2026" = "orange"))+
+  labs(
+    title = 'Mets Average Attendance by Month',
+    x = 'Month',
     y = 'Avg Attendance',
     subtitle = '2025 vs 2026 Seasons') + theme_cowplot()
 
