@@ -149,16 +149,3 @@ ggplot(mets, aes(x = `D/N`, y = Attendance, fill = Season)) +
     y = 'Avg Attendance',
     subtitle = '2025 vs 2026 Seasons') + theme_cowplot()
 
-
-# HYPOTHESES
-# Null Hypothesis #1: Win % Doesn't Affect Attendance (correlation)
-
-# Null Hypothesis #2: Day of Week Doesn't Affect Attendance (ANOVA)
-
-# Null Hypothesis #3: Theme Nights Don't Affect Attendance (t-test)
-
-# Null Hypothesis #4: Giveaway Nights Don't Affect Attendance (t-test)
-
-# Null Hypothesis #5: Playing a Rival Team Doesn't Affect Attendance (t-test, ANOVA for specific team)
-
-# Null Hypothesis #6: Time of Day Doesn't Affect Attendance (t-test)
