@@ -3,6 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(cowplot)
 library(tidymodels)
+library(modelsummary)
 
 # Download Data
 
@@ -57,3 +58,11 @@ ggplot(mets, aes(x= Predicted, y = Attendance, color = Season)) +
   subtitle = "Model 2",
   x = "Predicted Attendance",
   y = "Actual Attendance") + theme_cowplot()
+
+
+modelsummary(
+  list("Model 1" = model1, "Model 2" = model2),
+  stars = TRUE,
+  gof_map = c("nobs", "adj.r.squared", "rmse"),
+  output = "model_table.png"
+)
